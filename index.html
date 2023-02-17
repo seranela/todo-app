@@ -1,36 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Todo app</title>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+	<meta charset="UTF-8">
+	<meta name="description" content="Frontend Mentor Challenge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">-->
+	<link rel="stylesheet" href="css/default.css">
+	<link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+	<title>Frontend Mentor | Todo app</title>
 </head>
+
 <body>
+	<header class="header">
+		<h1 class="main-heading">Todo</h1>
+		<div class="theme-toggle-container">
+			<input type="checkbox" id="theme-toggle-checkbox" class="theme-toggle-checkbox">
+			<label for="theme-toggle-checkbox" class="sr-only">Toggle Light/Dark Mode</label>
+		</div>
+	</header>
+	<main class="main">
+		<div class="todo-new-container todo-list-entry">
+			<div>
+				<input type="checkbox" name="todo-entry-new" id="todo-entry-new" class="todo-list-entry-checkbox">
+				<label for="todo-entry-new" class="sr-only">Mark Completed</label>
+			</div>
+			<input type="text" id="todo-new" class="todo-new" placeholder="Create a new todo..." autofocus>
+			<label for="todo-new" class="sr-only">Todo Description</label>
+		</div>
 
-  Todo
+		<div class="todo-container">
+			<ul id="todo-list" class="todo-list" aria-live="polite">
+				<!-- Todo entries added here -->
+			</ul>
+			<div class="todo-footer">
+				<div class="todo-footer-left">
+					<span class="entries-active" aria-live="polite"><span id="entries-active-count">0</span> items left</span>
+				</div>
+				<div class="todo-footer-middle">
+					<fieldset class="radio-filter-container">
+						<legend class="sr-only">Choose a list filter</legend>
+			
+						<input type="radio" name="todo-filter" id="todo-filter-all" class="radio-filter sr-only" value="all" checked>
+						<label for="todo-filter-all" class="radio-filter-label">All</label>
+			
+						<input type="radio" name="todo-filter" id="todo-filter-active" class="radio-filter sr-only" value="active">
+						<label for="todo-filter-active" class="radio-filter-label">Active</label>
+			
+						<input type="radio" name="todo-filter" id="todo-filter-completed" class="radio-filter sr-only" value="completed">
+						<label for="todo-filter-completed" class="radio-filter-label">Completed</label>
+					</fieldset>
+				</div>
+				<div class="todo-footer-right">
+					<button class="button-clear-completed">Clear Completed</button>
+				</div>
+			</div>
+		</div>
 
-  <!-- Add dynamic number --> items left
-
-  All
-  Active 
-  Completed
-
-  Clear Completed
-
-  Drag and drop to reorder list
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+		<p class="drag-n-drop-message">Drag and drop to reorder list</p>
+	</main>
+	<script src="js/default.js"></script>
 </body>
+
 </html>
