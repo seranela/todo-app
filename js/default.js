@@ -1,12 +1,19 @@
 (() => {
 	/* --- Theme Switcher --- */
 
+	/**
+	 * Set specified theme
+	 * @param {string} themeName Name of the theme
+	 */
 	function setTheme(themeName) {
 		localStorage.setItem('todo-theme', themeName);
 		document.documentElement.className = themeName;
 	}
 
-	function toggleTheme(e) {
+	/**
+	 * Checks for saved theme (if any) and sets theme accordingly when toggling theme
+	 */
+	function toggleTheme() {
 		if (localStorage.getItem('todo-theme') === 'theme-light') {
 			setTheme('theme-dark');
 		} else {
@@ -14,6 +21,10 @@
 		}
 	}
 
+	/**
+	 * Checks for saved theme (if any) and set theme accordingly on window load
+	 * @param {Event} e Window load event data
+	 */
 	function getSelectedTheme(e) {
 		const savedTheme = localStorage.getItem('todo-theme');
 
@@ -38,10 +49,16 @@
 	let entriesActiveCount = 0;
 	let entriesCreatedCount = 0;
 
+	/**
+	 * Updates the active entries count
+	 */
 	function updateEntriesActiveCount() {
 		document.querySelector('#entries-active-count').innerText = entriesActiveCount;
 	}
 
+	/**
+	 * Generates and shows 'No entries' message
+	 */
 	function showNoEntries() {
 		const listEntry = document.createElement('li');
 		listEntry.className = 'todo-list-entry no-entries';
@@ -49,6 +66,9 @@
 		todoList.appendChild(listEntry);
 	}
 
+	/**
+	 * Updates todo list based on user-specified filtering method
+	 */
 	function updateList() {
 		// Track visible entries to determine if "No entries" message needs to be shown
 		let entriesVisible = 0;
@@ -95,11 +115,18 @@
 		}
 	}
 
+	/**
+	 * Set filtering method based on user selection
+	 * @param {Event} e Radio button click event data
+	 */
 	function setFilterMethod(e) {
 		filterMethod = e.target.value;
 		updateList();
 	}
 
+	/**
+	 * Saves todo list data into local storage
+	 */
 	function saveData() {
 		let entriesArray = [];
 
@@ -112,6 +139,9 @@
 		localStorage.setItem('todo-list', JSON.stringify(entriesArray));
 	}
 
+	/**
+	 * Clears todo list of completed entries
+	 */
 	function clearCompleted() {
 		// Remove completed entries
 		// Done in reverse order to avoid potential issues with removing children while looping
@@ -126,6 +156,10 @@
 		updateList();
 	}
 
+	/**
+	 * Sets todo entry as completed
+	 * @param {Event} e Checkbox selected event data
+	 */
 	function setCompleted(e) {
 		e.target.parentNode.setAttribute('data-completed', e.target.checked);
 		entriesActiveCount = (e.target.checked ? entriesActiveCount - 1 : entriesActiveCount + 1);
@@ -138,6 +172,10 @@
 		saveData();
 	}
 
+	/**
+	 * Deletes a user-specified todo entry
+	 * @param {Event} e Button click event data
+	 */
 	function deleteEntry(e) {
 		if (e.currentTarget.parentNode.dataset.completed === 'false') {
 			entriesActiveCount--;
@@ -153,12 +191,20 @@
 	let entryDragged = undefined;
 	let entryEntered = undefined;
 
+	/**
+	 * When user begins dragging todo entry
+	 * @param {Event} e Drag event data
+	 */
 	function dragStart(e) {
 		entryDragged = this;
 		e.dataTransfer.effectAllowed = 'move';
 		this.style.opacity = '0.4';
 	}
 
+	/**
+	 * When user finishes dragging todo entry
+	 * @param {Event} e Drag event data
+	 */
 	function dragEnd(e) {
 		if (entryEntered) {
 			entryEntered.classList.remove('drag-over');
@@ -170,6 +216,10 @@
 		saveData();
 	}
 
+	/**
+	 * When user drags todo entry into another element
+	 * @param {Event} e Drag event data
+	 */
 	function dragEnter(e) {
 		if (this.classList.contains('todo-list-entry')) {
 			if (entryEntered !== undefined && this !== entryEntered) {
@@ -180,15 +230,28 @@
 		}
 	}
 
+	/**
+	 * When user drags todo entry over another element
+	 * @param {Event} e Drag event data
+	 */
 	function dragOver(e) {
 		e.preventDefault();
 		e.dataTransfer.dropEffect = 'move';
 	}
 
+	/**
+	 * When user drops todo entry over another element
+	 * @param {Event} e Drag event data
+	 */
 	function dragDrop(e) {
 		e.preventDefault();
 	}
 
+	/**
+	 * Generates and shows new todo entry
+	 * @param {string} entryText Text description of todo
+	 * @param {boolean} isCompleted Whether todo is completed
+	 */
 	function createTodoEntry(entryText, isCompleted) {
 		// Provides unique ID for created entry
 		entriesCreatedCount++;
@@ -250,6 +313,10 @@
 		updateList();
 	}
 
+	/**
+	 * Processes key presses while entering a new todo entry
+	 * @param {Event} e Key press event data
+	 */
 	function onKeyUp(e) {
 		if (e.key === 'Enter' && e.target.value.trim().length > 0) {
 			// Is new todo entry completed?
@@ -261,6 +328,9 @@
 		}
 	}
 
+	/**
+	 * Checks for saved todo data and initializes list
+	 */
 	function initTodoList() {
 		// Track visible entries to determine if "No entries" message needs to be shown
 		let entriesVisible = 0;
