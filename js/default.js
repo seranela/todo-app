@@ -335,7 +335,7 @@
 		// Track visible entries to determine if "No entries" message needs to be shown
 		let entriesVisible = 0;
 
-		//localStorage.clear();
+		//localStorage.clear(); // For debugging purposes
 		const todoEntries = localStorage.getItem('todo-list');
 		if (todoEntries !== null) {
 			const todoEntriesParsed = JSON.parse(todoEntries);

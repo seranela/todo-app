@@ -111,6 +111,8 @@ body {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin: 0 auto;
+	max-width: 37rem;
 }
 
 .main-heading {
@@ -137,7 +139,9 @@ body {
 /* Main */
 
 .main {
-	margin: 1.5rem;
+	padding: 0 1.5rem;
+	margin: 1.5rem auto;
+	max-width: 37rem;
 }
 
 /* Todo - New Entry */
