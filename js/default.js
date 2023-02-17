@@ -265,25 +265,13 @@
 		// Track visible entries to determine if "No entries" message needs to be shown
 		let entriesVisible = 0;
 
+		//localStorage.clear();
 		const todoEntries = localStorage.getItem('todo-list');
-		//const todoEntries = null;
 		if (todoEntries !== null) {
 			const todoEntriesParsed = JSON.parse(todoEntries);
 			todoEntriesParsed.forEach((todoEntry) => {
 				createTodoEntry(todoEntry[0], todoEntry[1]);
 				entriesVisible++;
-			});
-		} else {
-			let sampleEntries = JSON.stringify([
-				['Entry #1', false],
-				['Entry #2', false],
-				['Entry #3', false],
-				['Entry #4', false],
-			]);
-			sampleEntries = JSON.parse(sampleEntries);
-			sampleEntries.forEach((entryItem) => {
-				createTodoEntry(entryItem[0], entryItem[1]);
-				entriesVisible++
 			});
 		}
 
